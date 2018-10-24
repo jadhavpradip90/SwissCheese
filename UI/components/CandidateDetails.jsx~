@@ -1,0 +1,74 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Rating, Form, TextArea, Label } from 'semantic-ui-react'
+
+
+
+class CandidateDetails extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.processAnalyticsData = this.processAnalyticsData.bind(this);
+    }
+
+    processAnalyticsData() {
+        console.log('Data Request')
+    }
+
+    render() {
+        console.log('CandidateInfoItem Props :: ', this.props);
+        const skills = this.props.itemDetails ? this.props.itemDetails.skills.split(",") : [];
+        return(
+            <div>
+                <div>
+                    {skills.map((m, index) => {
+                        return (
+                            <div>
+                                <div className="row" key={index}>
+                                    <div className="row">
+                                        <div className="candidate-info-label">
+                                            {m} :
+                                        </div>
+                                        <div className="candidate-info-value">
+                                            <Rating icon='star' defaultRating={0} maxRating={5} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+
+                    <div className="row">
+                        <div className="candidate-info-label">
+                            Over all Rating :
+                        </div>
+                        <div className="candidate-info-value">
+                            <Rating icon='star' defaultRating={0} maxRating={5} />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="candidate-info-label">Feedback:</div>
+                        <div className="candidate-info-feedback">
+                            <TextArea rows={4}  placeholder='Tell us more' />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="candidate-info-label"/>
+                        <div className="candidate-info-feedback">
+                            <button className="action-btn" onClick={this.processAnalyticsData}>Get Analytics</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+}
+
+CandidateDetails.propTypes = {
+    itemDetails: PropTypes.object
+};
+
+export default CandidateDetails;
